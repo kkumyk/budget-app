@@ -36,13 +36,13 @@ class UnitTests(unittest.TestCase):
         self.assertEqual(actual, expected, 'Expected `withdraw` method with no description to create a blank description.')
         self.assertEqual(good_withdraw, True, 'Expected `withdraw` method to return `True`.')
 
-    # def test_get_balance(self):
-    #     self.food.deposit(900, "deposit")
-    #     self.food.withdraw(45.67, "milk, cereal, eggs, bacon, bread")
-    #     actual = self.food.get_balance()
-    #     expected = 854.33
-    #     self.assertEqual(actual, expected, 'Expected balance to be 854.33')
-    #
+    def test_get_balance(self):
+        self.food.deposit(900, "deposit")
+        self.food.withdraw(45.67, "milk, cereal, eggs, bacon, bread")
+        actual = self.food.get_balance()
+        expected = 854.33
+        self.assertEqual(actual, expected, 'Expected balance to be 854.33')
+
     # def test_transfer(self):
     #     self.food.deposit(900, "deposit")
     #     self.food.withdraw(45.67, "milk, cereal, eggs, bacon, bread")
