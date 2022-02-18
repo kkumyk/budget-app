@@ -15,6 +15,7 @@ class Category:
             return True
         return False
 
+
     def get_balance(self):
         return self.balance
 
@@ -23,11 +24,12 @@ class Category:
             return False
         self.withdraw(transfer_amount, "Transfer to " + category.name)
         category.deposit(transfer_amount, "Transfer from " + self.name)
-
         return True
 
-    # def check_funds(self):
-    #     pass
+    def check_funds(self, amount):
+        if amount > self.get_balance():
+            return False
+        return True
 
 if __name__ == "__main__":
     food = Category("Food")
@@ -39,11 +41,14 @@ if __name__ == "__main__":
     food.withdraw(45.67, "milk, cereal, eggs, bacon, bread")
     food.transfer(20, entertainment)
 
-    # print(food.get_balance())
-    # print(food.ledger)
+    print(food.get_balance())
+    print(food.ledger)
 
     print(entertainment.get_balance())
     print(entertainment.ledger)
+
+    print(entertainment.check_funds(30))
+    print(food.check_funds(20))
 
 
 
