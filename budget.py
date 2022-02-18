@@ -15,7 +15,6 @@ class Category:
             return True
         return False
 
-
     def get_balance(self):
         return self.balance
 
@@ -31,27 +30,35 @@ class Category:
             return False
         return True
 
+    def __str__(self):
+        stars_len = (30 - len(self.name)) // 2
+        budget_string = '*' * stars_len + self.name + '*' * stars_len + '\n'
+        total_amount = 0
+        for entry in self.ledger:
+            description = entry["description"]
+            amount = entry["amount"]
+            total_amount += amount
+            budget_string += description[:23].ljust(23) + "{:>7.2f}".format(amount) + "\n"
+
+        return budget_string + "Total: " + str(total_amount)
+
+
 if __name__ == "__main__":
     food = Category("Food")
     entertainment = Category("Entertainment")
-    # entertainment.deposit(45, "cinema")
+    entertainment.deposit(45, "cinema")
 
     food.deposit(900, "deposit")
-    food.deposit(10, "tips")
     food.withdraw(45.67, "milk, cereal, eggs, bacon, bread")
     food.transfer(20, entertainment)
-
     print(food.get_balance())
     print(food.ledger)
+    print(food)
 
-    print(entertainment.get_balance())
-    print(entertainment.ledger)
-
-    print(entertainment.check_funds(30))
-    print(food.check_funds(20))
-
-
-
+    # print(entertainment.get_balance())
+    # print(entertainment.ledger)
+    # print(entertainment.check_funds(30))
+    # print(food.check_funds(20))
 
 
     # print(entertainment.balance)
