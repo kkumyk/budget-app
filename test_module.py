@@ -21,21 +21,21 @@ class UnitTests(unittest.TestCase):
         expected = {"amount": 45.56, "description": ""}
         self.assertEqual(actual, expected, 'Expected calling `deposit` method with no description to create a blank description.')
 
-    # def test_withdraw(self):
-    #     self.food.deposit(900, "deposit")
-    #     self.food.withdraw(45.67, "milk, cereal, eggs, bacon, bread")
-    #     actual = self.food.ledger[1]
-    #     expected = {"amount": -45.67, "description": "milk, cereal, eggs, bacon, bread"}
-    #     self.assertEqual(actual, expected, 'Expected `withdraw` method to create a specific object in the ledger instance variable.')
-    #
-    # def test_withdraw_no_description(self):
-    #     self.food.deposit(900, "deposit")
-    #     good_withdraw = self.food.withdraw(45.67)
-    #     actual = self.food.ledger[1]
-    #     expected = {"amount": -45.67, "description": ""}
-    #     self.assertEqual(actual, expected, 'Expected `withdraw` method with no description to create a blank description.')
-    #     self.assertEqual(good_withdraw, True, 'Expected `withdraw` method to return `True`.')
-    #
+    def test_withdraw(self):
+        self.food.deposit(900, "deposit")
+        self.food.withdraw(45.67, "milk, cereal, eggs, bacon, bread")
+        actual = self.food.ledger[1]
+        expected = {"amount": -45.67, "description": "milk, cereal, eggs, bacon, bread"}
+        self.assertEqual(actual, expected, 'Expected `withdraw` method to create a specific object in the ledger instance variable.')
+
+    def test_withdraw_no_description(self):
+        self.food.deposit(900, "deposit")
+        good_withdraw = self.food.withdraw(45.67)
+        actual = self.food.ledger[1]
+        expected = {"amount": -45.67, "description": ""}
+        self.assertEqual(actual, expected, 'Expected `withdraw` method with no description to create a blank description.')
+        self.assertEqual(good_withdraw, True, 'Expected `withdraw` method to return `True`.')
+
     # def test_get_balance(self):
     #     self.food.deposit(900, "deposit")
     #     self.food.withdraw(45.67, "milk, cereal, eggs, bacon, bread")

@@ -1,22 +1,26 @@
 class Category:
-    def __init__(self, name, initial_amount=0.0):
+    def __init__(self, name):
         self.name = name
-        self.balance = initial_amount
+        self.balance = 0
         self.ledger = []
 
     def deposit(self, amount, description=""):
         self.balance += amount
         self.ledger.append({"amount": amount, "description": description})
 
-    # def withdraw(self, amount, description=None):
-    #     # If there are not enough funds, nothing should be added to the ledger.
-    #     # This method should return True if the withdrawal took place, and False otherwise.
-    #     if amount > self.balance:
-    #         self.balance -= amount
-    #         self.ledger.append({"amount": (amount * -1), "description": description})
-    #         return False
-    #     return True
-    #
+    def withdraw(self, amount, description=""):
+        # If there are not enough funds, nothing should be added to the ledger.
+        # This method should return True if the withdrawal took place, and False otherwise.
+        if amount < self.balance:
+            self.balance -= amount
+            self.ledger.append({"amount": (amount * -1), "description": description})
+            return True
+        return False
+
+
+
+
+
     # def transfer(self, amount, name):
     #     pass
     #
@@ -26,43 +30,34 @@ class Category:
     def get_balance(self):
         return self.balance
 
+
 if __name__ == "__main__":
     food = Category("Food")
     entertainment = Category("Entertainment")
     business = Category("Business")
+    # entertainment.deposit(45, "cinema")
 
-    food.deposit(200)
-    food.deposit(1000, "initial deposit")
+    food.deposit(900, "deposit")
+    food.deposit(10, "tips")
+    food.withdraw(45.67, "milk, cereal, eggs, bacon, bread")
+
 
     print(food.balance)
     print(food.ledger)
 
+    # print(entertainment.balance)
+    # print(entertainment.ledger)
+
+# print(food.get_balance())
 
 
-
-
-
-
-   # print(food.get_balance())
-
-
-    # def transfer(self, amount, name):
-    #     self.amount = amount
-    #     self.name = name
-    #
-    #     if self.balance - amount > 0:
-    #         self.balance -= amount
-    #         self.ledger.append({"amount": (amount * -1), "description: Transfer to": name})
-
-
-
-
-
-
-
-
-
-
+# def transfer(self, amount, name):
+#     self.amount = amount
+#     self.name = name
+#
+#     if self.balance - amount > 0:
+#         self.balance -= amount
+#         self.ledger.append({"amount": (amount * -1), "description: Transfer to": name})
 
 
 #
