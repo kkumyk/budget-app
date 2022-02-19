@@ -47,6 +47,8 @@ class Category:
 
 def create_spend_chart(categories_list):
     bar_chart = "Percentage spent by category"
+    percentage_line = ''
+
     total_spend = 0
     separate_amounts = []
     for cat in categories_list:
@@ -62,7 +64,7 @@ def create_spend_chart(categories_list):
     spend_by_cat = dict(counter)
 
     for k, v in spend_by_cat.items():
-        spend_by_cat[k] = round(v/abs(total_spend) * 100)
+        spend_by_cat[k] = round(v/abs(total_spend) * 100) - round(v/abs(total_spend) * 100) % 10
 
     return spend_by_cat
 
