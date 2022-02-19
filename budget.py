@@ -43,31 +43,39 @@ class Category:
         return budget_string + "Total: " + str(total_amount)
 
 
+def create_spend_chart(categories_list):
+    bar_chart = "Percentage spent by category"
+    total_spend = 0
+    for cat in categories_list:
+        for entry in cat.ledger:
+            amount = entry["amount"]
+            if amount < 0:
+                total_spend += amount
+    return abs(total_spend)
+
+
+
+
+
 if __name__ == "__main__":
     food = Category("Food")
     entertainment = Category("Entertainment")
     entertainment.deposit(45, "cinema")
+    entertainment.withdraw(5)
 
     food.deposit(900, "deposit")
-    food.withdraw(45.67, "milk, cereal, eggs, bacon, bread")
+    food.withdraw(5, "milk, cereal, eggs, bacon, bread")
     food.transfer(20, entertainment)
-    print(food.get_balance())
+    # print(food.get_balance())
     print(food.ledger)
-    print(food)
+    print(entertainment.ledger)
+    #print(food)
+
+    print(create_spend_chart([food, entertainment]))
 
     # print(entertainment.get_balance())
-    # print(entertainment.ledger)
+
     # print(entertainment.check_funds(30))
     # print(food.check_funds(20))
-
-
     # print(entertainment.balance)
     # print(entertainment.ledger)
-
-
-
-
-
-
-# def create_spend_chart(categories):
-#     pass
