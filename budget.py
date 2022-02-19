@@ -1,3 +1,5 @@
+import collections
+
 class Category:
     def __init__(self, name):
         self.name = name
@@ -46,12 +48,23 @@ class Category:
 def create_spend_chart(categories_list):
     bar_chart = "Percentage spent by category"
     total_spend = 0
+    separate_amounts = []
     for cat in categories_list:
         for entry in cat.ledger:
             amount = entry["amount"]
             if amount < 0:
                 total_spend += amount
-    return abs(total_spend)
+                separate_amounts.append({cat.name: abs(amount)})
+
+    counter = collections.Counter()
+    for d in separate_amounts:
+        counter.update(d)
+    spend_by_cat = dict(counter)
+
+    for k, v in spend_by_cat.items():
+        spend_by_cat[k] = round(v/abs(total_spend) * 100)
+
+    return spend_by_cat
 
 
 
