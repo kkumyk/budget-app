@@ -47,8 +47,6 @@ class Category:
 
 
 def create_spend_chart(categories_list):
-    bar_chart_description = "Percentage spent by category"
-
     total_spend = 0
     separate_amounts = []
     for cat in categories_list:
@@ -64,7 +62,7 @@ def create_spend_chart(categories_list):
     spend_by_cat = dict(counter)
 
     for k, v in spend_by_cat.items():
-        spend_by_cat[k] = int(str(round(v / abs(total_spend) * 100) - round(v / abs(total_spend) * 100) % 10)[0])
+        spend_by_cat[k] = int(str(round(v / abs(total_spend) * 100) - round(v / abs(total_spend) * 100) % 10)[0]) + 1
 
     key_list = []
     lens = []
@@ -92,37 +90,37 @@ def create_spend_chart(categories_list):
     percentage_bar = []
     for p in range(100, -10, -10):
         percentage_bar.append((str(p) + "| ").rjust(5))
-    # print("percentage_bar:", percentage_bar)
 
     # Constructing the first line of the percentage bar
     # Get the first string from the amend_raw_dots
     first_spend_line = amend_raw_dots[0]
-    # print("first_spend_line:", len(first_spend_line))
     # split first_spend_line into a list of characters including the empty spaces
     first_spend_line_list = list(first_spend_line)
     # combine two lists - first_spend_line_list and percentage_bar - into pairs
     first_bar_line = [str(percentage_bar[i]) + first_spend_line_list[i] for i in range(len(percentage_bar))]
     # Replace the first item in the amend_raw_dots with the constructed first_bar_line
     amend_raw_dots[0] = first_bar_line
-    # print("amend_raw_dots:", amend_raw_dots)
 
     percentage_dots = ""
     for i in range(11):  # columns
         for dot in amend_raw_dots:  # rows
             percentage_dots += dot[i] + "  "
         percentage_dots += "\n"
-    percentage_dots += "    " + "-" * (len(raw_dots) * 2 + 3) + "\n"
+    percentage_dots += "    " + "-" * (len(raw_dots) * 2 + 4) + "\n"
 
-    return bar_chart_description + "\n" + percentage_dots + column_descriptions
+    return "Percentage spent by category" + "\n" + percentage_dots + column_descriptions.rstrip("\n")
 
 
-if __name__ == "__main__":
-    food = Category("Food")
-    entertainment = Category("Entertainment")
-    entertainment.deposit(45, "cinema")
-    entertainment.withdraw(5)
+# if __name__ == "__main__":
+#
+#     food = Category("Food")
+#     entertainment = Category("Entertainment")
+#     business = Category("Business")
+#     food.deposit(900, "deposit")
+#     entertainment.deposit(900, "deposit")
+#     business.deposit(900, "deposit")
+#     food.withdraw(105.55)
+#     entertainment.withdraw(33.40)
+#     business.withdraw(10.99)
+#     print(create_spend_chart([business, food, entertainment]))
 
-    food.deposit(900, "deposit")
-    food.withdraw(5, "milk, cereal, eggs, bacon, bread")
-    food.transfer(20, entertainment)
-    print(create_spend_chart([food, entertainment]))
